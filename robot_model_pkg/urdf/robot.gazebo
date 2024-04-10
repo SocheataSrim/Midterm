@@ -1,0 +1,161 @@
+<?xml version="1.0" ?>
+<robot name="my_robot">
+
+  <!-- Plugin to control the robot using ROS -->
+  <gazebo>
+    <plugin name="ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <!-- Define the robot model -->
+  <model name="my_robot">
+    <static>false</static> <!-- Set to true if the robot is static -->
+
+    <!-- Link representing the robot's base -->
+    <link name="base_link">
+      <!-- Visual representation of the base link -->
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.5 0.5 0.2</size> <!-- Set the dimensions of the base -->
+          </box>
+        </geometry>
+      </visual>
+
+      <!-- Collision representation of the base link -->
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.5 0.5 0.2</size> <!-- Set the dimensions of the collision -->
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- Inertial properties of the base link -->
+      <inertial>
+        <mass>1.0</mass> <!-- Set the mass of the base -->
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <!-- Define the wheels -->
+    <link name="front_left_wheel">
+      <!-- Visual representation of the wheel -->
+      <!-- Similar blocks for other wheels -->
+    </link>
+    <link name="front_right_wheel"></link>
+    <link name="rear_left_wheel"></link>
+    <link name="rear_right_wheel"></link>
+
+    <!-- Define joints connecting the wheels to the base -->
+    <joint name="front_left_wheel_joint" type="continuous">
+      <parent>base_link</parent>
+      <child>front_left_wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+    <joint name="front_right_wheel_joint" type="continuous">
+      <parent>base_link</parent>
+      <child>front_right_wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+    <joint name="rear_left_wheel_joint" type="continuous">
+      <parent>base_link</parent>
+      <child>rear_left_wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+    <joint name="rear_right_wheel_joint" type="continuous">
+      <parent>base_link</parent>
+      <child>rear_right_wheel</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <!-- Transmission definitions -->
+    <transmission type="transmission_interface/SimpleTransmission" name="front_left_wheel_transmission">
+      <joint name="front_left_wheel_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="front_left_wheel_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission type="transmission_interface/SimpleTransmission" name="front_right_wheel_transmission">
+      <joint name="front_right_wheel_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="front_right_wheel_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission type="transmission_interface/SimpleTransmission" name="rear_left_wheel_transmission">
+      <joint name="rear_left_wheel_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="rear_left_wheel_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+    <transmission type="transmission_interface/SimpleTransmission" name="rear_right_wheel_transmission">
+      <joint name="rear_right_wheel_joint">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="rear_right_wheel_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
+  </model>
+
+  <!-- Define the camera sensor -->
+  <sensor name="camera_sensor" type="camera">
+    <!-- Camera properties -->
+  </sensor>
+
+  <!-- Define the LiDAR sensor -->
+  <sensor name="lidar_sensor" type="ray">
+    <!-- LiDAR properties -->
+  </sensor>
+
+  <!-- Define the Gazebo world -->
+  <world name="my_world">
+    <!-- Include the ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Include the robot model -->
+    <include>
+      <uri>model://my_robot</uri>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- Include the camera sensor -->
+    <include>
+      <uri>model://camera_sensor</uri>
+      <pose>1 1 1 0 0 0</pose> <!-- Adjust pose as needed -->
+    </include>
+
+    <!-- Include the LiDAR sensor -->
+    <include>
+      <uri>model://lidar_sensor</uri>
+      <pose>-1 -1 1 0 0 0</pose> <!-- Adjust pose as needed -->
+    </include>
+  </world>
+
+</robot>
+

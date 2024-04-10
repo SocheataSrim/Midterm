@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot name="transmission" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Define a generic transmission -->
+  <xacro:macro name="generic_transmission">
+    <transmission name="my_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="my_joint"/> <!-- Replace 'my_joint' with the name of the joint -->
+      <actuator name="my_actuator"> <!-- Replace 'my_actuator' with the name of the actuator -->
+        <mechanicalReduction>1</mechanicalReduction> <!-- Adjust mechanical reduction as needed -->
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+</robot>

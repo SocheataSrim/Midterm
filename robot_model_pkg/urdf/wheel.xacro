@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot name="wheel" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Define visual properties of the wheel -->
+  <xacro:macro name="wheel_visual">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/> <!-- Adjust length and radius as needed -->
+      </geometry>
+      <material name="grey"/>
+    </visual>
+  </xacro:macro>
+
+  <!-- Define collision properties of the wheel -->
+  <xacro:macro name="wheel_collision">
+    <collision>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/> <!-- Adjust length and radius as needed -->
+      </geometry>
+    </collision>
+  </xacro:macro>
+
+  <!-- Include visual and collision properties -->
+  <xacro:wheel_visual />
+  <xacro:wheel_collision />
+
+</robot>

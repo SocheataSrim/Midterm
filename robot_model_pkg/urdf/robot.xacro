@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Include necessary components -->
+  <xacro:include filename="$(find robot_model_pkg)/urdf/base_link.xacro"/>
+  <xacro:include filename="$(find robot_model_pkg)/urdf/wheel.xacro"/>
+  <xacro:include filename="$(find robot_model_pkg)/urdf/joint.xacro"/>
+  <xacro:include filename="$(find robot_model_pkg)/urdf/transmission.xacro"/>
+  <xacro:include filename="$(find robot_model_pkg)/urdf/camera.xacro"/>
+  <xacro:include filename="$(find robot_model_pkg)/urdf/lidar.xacro"/>
+
+  <!-- Define robot links and joints -->
+  <xacro:base_link />
+  <xacro:wheel_link name="front_left_wheel" />
+  <xacro:wheel_link name="front_right_wheel" />
+  <xacro:wheel_link name="rear_left_wheel" />
+  <xacro:wheel_link name="rear_right_wheel" />
+
+  <xacro:wheel_joint name="front_left_wheel_joint" parent="base_link" child="front_left_wheel" />
+  <xacro:wheel_joint name="front_right_wheel_joint" parent="base_link" child="front_right_wheel" />
+  <xacro:wheel_joint name="rear_left_wheel_joint" parent="base_link" child="rear_left_wheel" />
+  <xacro:wheel_joint name="rear_right_wheel_joint" parent="base_link" child="rear_right_wheel" />
+
+  <!-- Add transmission -->
+  <xacro:transmission />
+
+  <!-- Add camera sensor -->
+  <xacro:include filename="$(find robot_model_pkg)/urdf/camera.xacro" />
+
+  <!-- Add lidar sensor -->
+  <xacro:include filename="$(find robot_model_pkg)/urdf/lidar.xacro" />
+
+</robot>
+

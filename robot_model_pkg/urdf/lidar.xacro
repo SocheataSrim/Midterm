@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<robot name="lidar" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Define visual properties of the LiDAR -->
+  <xacro:macro name="lidar_visual">
+    <visual>
+      <geometry>
+        <!-- Adjust the shape and size of the LiDAR visual representation -->
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </xacro:macro>
+
+  <!-- Define collision properties of the LiDAR -->
+  <xacro:macro name="lidar_collision">
+    <collision>
+      <geometry>
+        <!-- Adjust the shape and size of the LiDAR collision representation -->
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+    </collision>
+  </xacro:macro>
+
+  <!-- Define inertial properties of the LiDAR -->
+  <xacro:macro name="lidar_inertial">
+    <inertial>
+      <mass value="0.1"/> <!-- Adjust mass as needed -->
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+               iyy="0.001" iyz="0.0"
+               izz="0.001"/>
+    </inertial>
+  </xacro:macro>
+
+  <!-- Include visual, collision, and inertial properties -->
+  <xacro:lidar_visual />
+  <xacro:lidar_collision />
+  <xacro:lidar_inertial />
+
+</robot>
